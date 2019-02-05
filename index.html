@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Promisque Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="jquery.min.js"></script>
+    <script src="promisque.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var deferredExample = function(i){
+                var deferred = new $.Deferred();
+                setTimeout(function(){
+                    console.log("Finished Running Queue " + (i + 1));
+                    deferred.resolve();
+                }, 1000);
+                return deferred;
+            };
+            var $pq = new Promisque();
+            for(var i = 0; i < 50; i++){
+                $pq.push(deferredExample, i);
+            }
+            $pq.run(3);
+        });
+    </script>
+</body>
+</html>
